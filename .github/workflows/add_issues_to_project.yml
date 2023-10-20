@@ -1,0 +1,16 @@
+name: ProjectへIssueを自動追加
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    name: 卒業研究プロジェクトへ自動追加
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@RELEASE_VERSION
+        with:
+          project-url: https://github.com/orgs/project-mahiwa/projects/3
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
