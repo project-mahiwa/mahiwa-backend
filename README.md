@@ -25,6 +25,11 @@ cd ~/esp/esp-idf
 
 ```
 git clone --recursive https://github.com/project-mahiwa/mahiwa-backend
+```
+
+### build and flash
+
+```
 cd mahiwa-backend
 . ~/esp/esp-idf/export.sh
 idf.py set-target esp32c3
