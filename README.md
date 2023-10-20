@@ -1,5 +1,10 @@
 # mahiwa-backend
 
+## environment
+
+- ESP-IDF : esp-idf:v5.x
+- C++ : c++23
+
 ## getting started
 
 ### Install esp-idf
