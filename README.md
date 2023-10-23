@@ -35,10 +35,22 @@ yay -S platformio-git
 ```
 git clone --recursive https://github.com/project-mahiwa/mahiwa-backend
 cd mahiwa-backend
-pip run -t m5stack-atoms3
+pio run -t upload -e m5stack-atoms3
 ```
 
+- pio runでライブラリの依存は自動解決してくれる
+
 ## development
+
+### serial monitor
+
+https://docs.platformio.org/en/stable/core/userguide/device/cmd_monitor.html
+
+```
+pio device monitor -b 115200
+```
+
+- -p select a device
 
 ### GUI
 
@@ -85,16 +97,6 @@ https://docs.platformio.org/en/stable/core/userguide/device/cmd_list.html
 ```
 pio device list
 ```
-
-### serial monitor
-
-https://docs.platformio.org/en/stable/core/userguide/device/cmd_monitor.html
-
-```
-pio device monitor
-```
-
-- -p select a device
 
 ### debug
 

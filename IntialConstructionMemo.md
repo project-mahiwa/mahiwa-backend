@@ -39,6 +39,9 @@ pio pkg install
 ```
 
 - -eで環境指定できる
+- -p platformのinstall
+- -t toolのインストール
+- -l libraryのインストール
 
 # 初期構築 v1 (esp-idf)
 
