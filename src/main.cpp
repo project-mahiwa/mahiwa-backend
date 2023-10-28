@@ -1,6 +1,4 @@
-#include "Arduino.h"
-#include "lib/roader/wasm-roader.hpp"
-
+#include <lib/roader/wasm-roader.hpp>
 void setup()
 {
     Serial.begin(115200);
@@ -12,6 +10,7 @@ void setup()
 
     Serial.println("Project Mahiwa started!!!!!");
 #ifdef ESP32
+    Serial.println("ESP32 Mode");
     // 既存のGitリポジトリより，ESP32だけ読み込み方変える必要があるらしい
     xTaskCreatePinnedToCore(&wasm_task, "wasm3", NATIVE_STACK_SIZE, NULL, 5, NULL, 1);
 #else

@@ -1,4 +1,8 @@
-#include "wasm-roader.hpp"
+#ifndef wasm_roader_hpp
+#define wasm_roader_hpp
+#include <lib/roader/wasm-roader.hpp>
+#endif // wasm_roader_hpp
+#include <wasm/serial-print-and-arduino-delay.hpp>
 void wasm_task(void *)
 {
     M3Result result = m3Err_none;
@@ -16,7 +20,8 @@ void wasm_task(void *)
     }
 
     IM3Module module;
-    result = m3_ParseModule(env, &module, app_wasm, app_wasm_len);
+    // tinygo_wasi_wasm, tinygo_wasi_wasm_lenはxxdで出せる
+    result = m3_ParseModule(env, &module, tinygo_wasi_wasm, tinygo_wasi_wasm_len);
     if (result)
     {
         Serial.println("m3_ParseModule Error");
