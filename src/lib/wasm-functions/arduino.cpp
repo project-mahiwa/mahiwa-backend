@@ -1,4 +1,4 @@
-#include <lib/wasm-function/arduino.hpp>
+#include <lib/wasm-functions/arduino.hpp>
 
 m3ApiRawFunction(m3_arduino_delay)
 {
