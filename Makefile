@@ -21,3 +21,6 @@ run-core2:
 	pio run -t upload -e m5stack-core2
 run-c3:
 	pio run -t upload -e seeed_xiao_esp32c3
+
+debug-atom:
+	pio debug -e m5stack-atom
