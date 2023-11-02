@@ -1,9 +1,12 @@
 #include <lib/roader/wasm-roader.hpp>
-void setup() {
+// cppcheck-suppress unusedFunction
+void setup()
+{
   Serial.begin(115200);
   delay(1000);
   // シリアル通信準備待ち
-  while (!Serial) {
+  while (!Serial)
+  {
   }
 
   Serial.println("Project Mahiwa started!!!!!");
@@ -19,6 +22,8 @@ void setup() {
 #endif
 }
 
-void loop() {
+// cppcheck-suppress unusedFunction
+void loop()
+{
   // wasm3が実行するとすべてを終える仕様のようなので，繰り返し実行できない
 }

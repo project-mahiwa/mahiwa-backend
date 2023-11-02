@@ -1,10 +1,10 @@
 #include <lib/roader/wasm-roader.hpp>
 #include <lib/helper/wasm3-debugger.hpp>
 #include <wasm/serial-print-and-arduino-delay.hpp>
+
+// cppcheck-suppress unusedFunction
 void wasm_task(void *)
 {
-  M3Result result = m3Err_none;
-
   IM3Environment env = m3_NewEnvironment();
   if (!env)
   {
@@ -19,7 +19,7 @@ void wasm_task(void *)
 
   IM3Module module;
   // tinygo_wasi_wasm, tinygo_wasi_wasm_lenはxxdで出せる
-  result = m3_ParseModule(env, &module, tinygo_wasi_wasm, tinygo_wasi_wasm_len);
+  M3Result result = m3_ParseModule(env, &module, tinygo_wasi_wasm, tinygo_wasi_wasm_len);
   if (result)
   {
     wasm3_error_printer("m3_ParseModule", result);

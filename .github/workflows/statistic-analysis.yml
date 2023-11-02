@@ -23,4 +23,7 @@ jobs:
         run: pip install --upgrade platformio
 
       - name: 静的解析(cppcheck)
-        run: pio check
+        run: |
+          # esp32系とpico系で最低限チェック
+          pio check -e pico
+          pio check -e m5stack-atom

@@ -23,4 +23,8 @@ jobs:
         run: pip install --upgrade platformio
 
       - name: ビルドチェック
-        run: pio run
+        run: |
+          # esp32系(Xtensa,esp32c3)とpico系で最低限チェック
+          pio run -e pico
+          pio run -e m5stack-atom
+          pio run -e seeed_xiao_esp32c3
