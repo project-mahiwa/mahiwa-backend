@@ -14,10 +14,10 @@ monitor:
 r-pico:
 	pio run -t upload -e pico
 	@make monitor
-# M5 ATOM Matrixはwasm3が動かない(PSRAMが無い)
-# r-atom:
-# 	pio run -t upload -e m5stack-atom
-# 	@make monitor
+# M5 ATOM Matrixはwasm3が動かない(PSRAMが無い)が，壊れの検証用にあえて残しておく
+r-atom:
+	pio run -t upload -e m5stack-atom
+	@make monitor
 r-atoms3:
 	pio run -t upload -e m5stack-atoms3
 	@make monitor
