@@ -11,9 +11,9 @@ m3ApiRawFunction(m3_arduino_delay)
 m3ApiRawFunction(m3_serial_print)
 {
     // cppcheck-suppress cstyleCast
-    m3ApiGetArgMem(const byte *, out);
+    m3ApiGetArgMem(const uint8_t *, out);
     // cppcheck-suppress cstyleCast
-    m3ApiGetArg(int32_t, out_len);
+    m3ApiGetArg(uint32_t, out_len);
     byte buff[out_len + 1];
     memcpy(buff, out, out_len);
     buff[out_len] = '\0';
