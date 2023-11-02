@@ -1,6 +1,8 @@
 #include <lib/roader/wasm-roader.hpp>
 #include <lib/helper/wasm3-debugger.hpp>
 #include <wasm/serial-print-and-arduino-delay.hpp>
+
+// cppcheck-suppress unusedFunction
 void wasm_task(void *)
 {
   M3Result result = m3Err_none;
