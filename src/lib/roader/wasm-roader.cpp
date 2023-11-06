@@ -19,7 +19,7 @@ void wasm_task(void *)
 
   IM3Module module;
   // tinygo_wasi_wasm, tinygo_wasi_wasm_lenはxxdで出せる
-  M3Result result = m3_ParseModule(env, &module, tinygo_wasi_wasm, tinygo_wasi_wasm_len);
+  M3Result result = m3_ParseModule(env, &module, tinygo_wasi_memory_limit_wasm, tinygo_wasi_memory_limit_wasm_len);
   if (result)
   {
     wasm3_error_printer("m3_ParseModule", result);
