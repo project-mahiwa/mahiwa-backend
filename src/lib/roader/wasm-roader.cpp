@@ -1,47 +1,42 @@
-#include <lib/roader/wasm-roader.hpp>
 #include <lib/helper/wasm3-debugger.hpp>
-#include <wasm/serial-print-and-arduino-delay.hpp>
+#include <lib/roader/wasm-roader.hpp>
+// #include <wasm/go-serial-print-and-arduino-delay.hpp>
+#include <wasm/rust-serial-print-and-arduino-delay.hpp>
 
 // cppcheck-suppress unusedFunction
-void wasm_task(void *)
-{
+void wasm_task(void *) {
   IM3Environment env = m3_NewEnvironment();
-  if (!env)
-  {
+  if (!env) {
     wasm3_error_printer("m3_NewEnvironment", "Error");
   }
 
   IM3Runtime runtime = m3_NewRuntime(env, WASM_STACK_SLOTS, NULL);
-  if (!runtime)
-  {
+  if (!runtime) {
     wasm3_error_printer("m3_NewRuntime", "Error");
   }
 
   IM3Module module;
   // tinygo_wasi_wasm, tinygo_wasi_wasm_lenはxxdで出せる
-  M3Result result = m3_ParseModule(env, &module, tinygo_wasi_memory_limit_wasm, tinygo_wasi_memory_limit_wasm_len);
-  if (result)
-  {
+  M3Result result = m3_ParseModule(env, &module, rust_hello_world_wasm,
+                                   rust_hello_world_wasm_len);
+  if (result) {
     wasm3_error_printer("m3_ParseModule", result);
   }
 
   result = m3_LoadModule(runtime, module);
-  if (result)
-  {
+  if (result) {
     wasm3_error_printer("m3_LoadModule", result);
   }
 
   // WebAssemblyに埋め込む処理
   result = mahiwa_LinkArduino(runtime);
-  if (result)
-  {
+  if (result) {
     wasm3_error_printer("mahiwa_LinkArduino", result);
   }
 
   IM3Function f;
   result = m3_FindFunction(&f, runtime, "_start");
-  if (result)
-  {
+  if (result) {
     wasm3_error_printer("m3_FindFunction", result);
   }
 
@@ -51,8 +46,7 @@ void wasm_task(void *)
   result = m3_CallV(f);
 
   // 失敗時の処理
-  if (result)
-  {
+  if (result) {
     M3ErrorInfo info;
     m3_GetErrorInfo(runtime, &info);
     Serial.print("Error: ");
@@ -60,8 +54,7 @@ void wasm_task(void *)
     Serial.print(" (");
     Serial.print(info.message);
     Serial.println(")");
-    if (info.file && strlen(info.file) && info.line)
-    {
+    if (info.file && strlen(info.file) && info.line) {
       Serial.print("At ");
       Serial.print(info.file);
       Serial.print(":");
