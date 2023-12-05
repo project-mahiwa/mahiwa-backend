@@ -1,13 +1,4 @@
-#include <lib/wasm-functions/arduino.hpp>
-
-m3ApiRawFunction(m3_arduino_delay)
-{
-    // cppcheck-suppress cstyleCast
-    m3ApiGetArg(uint32_t, ms);
-    delay(ms);
-    m3ApiSuccess();
-}
-
+#include <lib/wasm-functions/arduino/serial.hpp>
 m3ApiRawFunction(m3_serial_print)
 {
     // cppcheck-suppress cstyleCast
@@ -21,13 +12,11 @@ m3ApiRawFunction(m3_serial_print)
     m3ApiSuccess();
 }
 
-M3Result mahiwa_LinkArduino(IM3Runtime runtime)
+M3Result mahiwa_LinkSerial(IM3Runtime runtime)
 {
     IM3Module module = runtime->modules;
-    const char *arduino = "arduino";
     const char *serial = "serial";
 
-    m3_LinkRawFunction(module, arduino, "delay", "v(i)", &m3_arduino_delay);
     m3_LinkRawFunction(module, serial, "print", "v(*i)", &m3_serial_print);
 
     return m3Err_none;
