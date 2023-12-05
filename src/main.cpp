@@ -1,7 +1,11 @@
 #include <lib/roader/wasm-roader.hpp>
+#include <apis/impl/Serial.h>
+#include <Mahiwa.h>
+
 // cppcheck-suppress unusedFunction
 void setup()
 {
+
   Serial.begin(115200);
   delay(1000);
   // シリアル通信準備待ち
@@ -9,7 +13,9 @@ void setup()
   {
   }
 
-  Serial.println("Project Mahiwa started!!!!!");
+  M_Serial serial;
+  Mahiwa mahiwa(&serial);
+  mahiwa.init();
 #ifdef ESP32
   Serial.println("ESP32 Mode");
   // xTaskCreatePinnedToCoreはFreeRTOSの関数

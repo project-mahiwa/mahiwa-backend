@@ -1,14 +1,17 @@
+#pragma once
+#include <apis/ApiInterface.h>
+#include <Arduino.h>
 class Mahiwa
 {
 private:
-    BoardInterface board;
-    SocInterface soc;
-    ApiInterface api;
+    // BoardInterface board;
+    // SocInterface soc;
+    ApiInterface *api;
     // LibraryInterfaceの配列
 public:
     // コンストラクタで代入
-    Mahiwa(BoardInterface board, SoCInterface soc, ApiInterface api, ライブラリ){};
+    Mahiwa(ApiInterface *api) { this->api = api; };
     void init();
-    void addFunctions();
-    void run();
+    // void addFunctions();
+    // void run();
 };
