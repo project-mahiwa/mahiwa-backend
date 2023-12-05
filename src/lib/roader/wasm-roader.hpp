@@ -1,12 +1,12 @@
 #pragma once
+//
 #include <Arduino.h>
 #include <wasm3.h>
-#include <lib/helper/wasm3-debugger.hpp>
-#include <lib/roader/wasm-roader.hpp>
-// #include <wasm/go-serial-print-and-arduino-delay.hpp>
-#include <wasm/rust-serial-print-and-arduino-delay.hpp>
 
-// 定義の追加
+//
+#include <lib/helper/wasm3-debugger.hpp>
+
+// 定義読み込み
 #include <lib/wasm-functions/arduino/arduino.hpp>
 #include <lib/wasm-functions/arduino/serial.hpp>
 

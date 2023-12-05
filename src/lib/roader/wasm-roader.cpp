@@ -1,4 +1,6 @@
 #include <lib/roader/wasm-roader.hpp>
+// wasmファイルをヘッダファイルにしたもの(ヘッダファイルでなくcpp内で読むこと @see https://github.com/project-mahiwa/mahiwa-backend/issues/49 )
+#include <wasm/rust-serial-print-and-arduino-delay.hpp>
 // cppcheck-suppress unusedFunction
 void wasm_task(void *)
 {
@@ -30,15 +32,15 @@ void wasm_task(void *)
   }
 
   // WebAssemblyに埋め込む処理
-  result = mahiwa_LinkSerial(runtime);
-  if (result)
-  {
-    wasm3_error_printer("mahiwa_LinkSerial", result);
-  }
   result = mahiwa_LinkArduino(runtime);
   if (result)
   {
     wasm3_error_printer("mahiwa_LinkArduino", result);
+  }
+  result = mahiwa_LinkSerial(runtime);
+  if (result)
+  {
+    wasm3_error_printer("mahiwa_LinkSerial", result);
   }
 
   IM3Function f;
