@@ -1,7 +1,7 @@
 ---
 name: リファクタリング要望
 about: ここリファクタリングしたいのissue
-title: "[🛠️Refactor]:"
+title: "[🛠️Refactor]: "
 labels: "🛠️refactor"
 assignees: "usuyuki"
 ---
