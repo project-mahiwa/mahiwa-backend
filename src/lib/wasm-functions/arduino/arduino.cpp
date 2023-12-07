@@ -2,6 +2,20 @@
 // m3ApiRawFunction はただのマクロなので注意
 
 /**
+ * Characters
+ */
+// m3ApiRawFunction(m3_isAlpha)
+// {
+//     m3ApiGetArgMem(const uint8_t *, out);
+//     m3ApiGetArg(uint32_t, out_len);
+//     byte buff[out_len + 1];
+//     memcpy(buff, out, out_len);
+//     buff[out_len] = '\0';
+//     m3ApiReturnType(boolean);
+//     m3ApiReturn(isAlpha((int *)buff));
+//     m3ApiSuccess();
+// }
+/**
  * Trigonometry
  */
 m3ApiRawFunction(m3_cos)
