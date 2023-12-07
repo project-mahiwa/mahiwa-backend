@@ -2,36 +2,92 @@
 // m3ApiRawFunction はただのマクロなので注意
 
 /**
- * Analog I/O
+ * Math
  */
-// AnalogReferenceはマイコンによって種類が違う
-uint8_t convertAnalogReferenceType(uint8_t mode)
-    // {
-    //     switch (mode)
-    //     {
-    //     case 0:
-    //         return DEFAURT;
-    //     case 1:
-    //         return INTERNAL;
-    //     case 2:
-    //         return INTERNAL1V1;
-    //     case 3:
-    //         return INTERNAL2V56;
-    //     case 4:
-    //         return EXTERNAL;
-    //     default:
-    //         // 正直これ以外がきたら，ちゃんと例外にして止めたい
-    //         return DEFAULT;
-    //     }
-    // }
-
-    m3ApiRawFunction(m3_analogRead)
+m3ApiRawFunction(m3_abs)
 {
-    m3ApiGetArg(uint32_t, pin);
-    // returnはHIGHかLOWなので，HIGH:1 LOW:0にして返す
-    m3ApiReturnType(uint8_t);
+    m3ApiGetArg(int, x);
+    m3ApiReturnType(int);
 
-    m3ApiReturn(analogRead(pin) == HIGH ? 1 : 0);
+    m3ApiReturn(abs(x));
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_constrain)
+{
+    m3ApiGetArg(int, x);
+    m3ApiGetArg(int, a);
+    m3ApiGetArg(int, b);
+    m3ApiReturnType(int);
+
+    m3ApiReturn(constrain(x, a, b));
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_map)
+{
+    m3ApiGetArg(long, value);
+    m3ApiGetArg(long, fromLow);
+    m3ApiGetArg(long, fromHight);
+    m3ApiGetArg(long, toLow);
+    m3ApiGetArg(long, toHigh);
+    m3ApiReturnType(long);
+
+    m3ApiReturn(map(value, fromLow, fromHight, toLow, toHigh));
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_max)
+{
+    m3ApiGetArg(long, x);
+    m3ApiGetArg(long, y);
+    m3ApiReturnType(long);
+
+    m3ApiReturn(max(x, y));
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_min)
+{
+    m3ApiGetArg(long, x);
+    m3ApiGetArg(long, y);
+    m3ApiReturnType(long);
+
+    m3ApiReturn(min(x, y));
+
+    m3ApiSuccess();
+}
+m3ApiRawFunction(m3_pow)
+{
+    m3ApiGetArg(long, base);
+    m3ApiGetArg(long, exponent);
+    m3ApiReturnType(double);
+
+    m3ApiReturn(pow(base, exponent));
+
+    m3ApiSuccess();
+}
+m3ApiRawFunction(m3_sq)
+{
+    m3ApiGetArg(int, x);
+    m3ApiReturnType(int);
+
+    // これ型の指定なしだけどどうする？
+    m3ApiReturn(sq(x));
+
+    m3ApiSuccess();
+}
+m3ApiRawFunction(m3_sqrt)
+{
+    m3ApiGetArg(int, x);
+    m3ApiReturnType(double);
+
+    // これ型の指定なしだけどどうする？
+    m3ApiReturn(sqrt(x));
 
     m3ApiSuccess();
 }
