@@ -237,16 +237,34 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
 {
     IM3Module module = runtime->modules;
     const char *arduino = "arduino";
+    // m3_LinkRawFunctionのi_signatureの書き方→https://github.com/wasm3/wasm3/issues/109
+    // 厳密には正しくないが，WebAssemblyの型の制限もあるので，下記のように変換する
+    // int,uint_8,uint_16,uint_32→i(i32)
+    // uint64_t,long→I(i64)
+    // float→f(f32)
+    // double→F(f64)
+    // void→v(void)
+    /**
+     * Math
+     */
+    m3_LinkRawFunction(module, arduino, "abs", "i(i)", &m3_abs);
+    m3_LinkRawFunction(module, arduino, "constrain", "i(iii)", &m3_constrain);
+    m3_LinkRawFunction(module, arduino, "map", "I(IIIII)", &m3_map);
+    m3_LinkRawFunction(module, arduino, "max", "I(I)", &m3_max);
+    m3_LinkRawFunction(module, arduino, "min", "I(I)", &m3_min);
+    m3_LinkRawFunction(module, arduino, "pow", "F(I)", &m3_pow);
+    m3_LinkRawFunction(module, arduino, "sq", "i(i)", &m3_sq);
+    m3_LinkRawFunction(module, arduino, "sqrt", "F(i)", &m3_sqrt);
     /**
      * analog I/O
      */
-    m3_LinkRawFunction(module, arduino, "analogRead", "v(i)", &m3_analogRead);
+    m3_LinkRawFunction(module, arduino, "analogRead", "i(i)", &m3_analogRead);
     // m3_LinkRawFunction(module, arduino, "analogReference", "v(ii)", &m3_analogReference);
     m3_LinkRawFunction(module, arduino, "analogWrite", "v(ii)", &m3_analogWrite);
     /**
      * Digital I/O
      */
-    m3_LinkRawFunction(module, arduino, "digitalRead", "v(i)", &m3_digitalRead);
+    m3_LinkRawFunction(module, arduino, "digitalRead", "i(i)", &m3_digitalRead);
     m3_LinkRawFunction(module, arduino, "digitalWrite", "v(ii)", &m3_digitalWrite);
     m3_LinkRawFunction(module, arduino, "pinMode", "v(ii)", &m3_pinMode);
 
@@ -255,8 +273,8 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
      */
     m3_LinkRawFunction(module, arduino, "delay", "v(i)", &m3_delay);
     m3_LinkRawFunction(module, arduino, "delayMicroseconds", "v(i)", &m3_delayMicroseconds);
-    m3_LinkRawFunction(module, arduino, "millis", "v(i)", &m3_millis);
-    m3_LinkRawFunction(module, arduino, "micros", "v(i)", &m3_micros);
+    m3_LinkRawFunction(module, arduino, "millis", "I()", &m3_millis);
+    m3_LinkRawFunction(module, arduino, "micros", "I()", &m3_micros);
 
     return m3Err_none;
 }
