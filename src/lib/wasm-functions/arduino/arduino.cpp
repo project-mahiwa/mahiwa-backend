@@ -1,5 +1,30 @@
 #include <lib/wasm-functions/arduino/arduino.hpp>
 // m3ApiRawFunction はただのマクロなので注意
+/**
+ * Random Numbers
+ */
+m3ApiRawFunction(m3_random)
+{
+    // https: // www.arduino.cc/reference/en/language/functions/random-numbers/random/
+    // 公式リファレンスには
+    // random(max)
+    // random(min, max)
+    // と引数の数に応じて内容が変わるが，コードを見る限り引数はvoidなので
+    // random()として実装
+    m3ApiReturnType(long);
+
+    m3ApiReturn(random());
+
+    m3ApiSuccess();
+}
+m3ApiRawFunction(m3_randomSeed)
+{
+    m3ApiGetArg(long, seed);
+
+    randomSeed(seed);
+
+    m3ApiSuccess();
+}
 
 /**
  * Characters
@@ -291,6 +316,11 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
     // double→F(f64)
     // void→v(void)
 
+    /**
+     * Random Numbers
+     */
+    m3_LinkRawFunction(module, arduino, "random", "I()", &m3_random);
+    m3_LinkRawFunction(module, arduino, "randomSeed", "v(I)", &m3_randomSeed);
     /**
      * Trigonometry
      */
