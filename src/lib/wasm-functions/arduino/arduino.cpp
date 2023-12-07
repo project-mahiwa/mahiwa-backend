@@ -2,6 +2,38 @@
 // m3ApiRawFunction はただのマクロなので注意
 
 /**
+ * Trigonometry
+ */
+m3ApiRawFunction(m3_cos)
+{
+    m3ApiGetArg(int, rad);
+    m3ApiReturnType(double);
+
+    m3ApiReturn(cos(rad));
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_sin)
+{
+    m3ApiGetArg(int, rad);
+    m3ApiReturnType(double);
+
+    m3ApiReturn(sin(rad));
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_tan)
+{
+    m3ApiGetArg(int, rad);
+    m3ApiReturnType(double);
+
+    m3ApiReturn(tan(rad));
+
+    m3ApiSuccess();
+}
+/**
  * Math
  */
 m3ApiRawFunction(m3_abs)
@@ -244,6 +276,13 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
     // float→f(f32)
     // double→F(f64)
     // void→v(void)
+
+    /**
+     * Trigonometry
+     */
+    m3_LinkRawFunction(module, arduino, "cos", "F(i)", &m3_cos);
+    m3_LinkRawFunction(module, arduino, "sin", "F(i)", &m3_sin);
+    m3_LinkRawFunction(module, arduino, "tan", "F(i)", &m3_tan);
     /**
      * Math
      */
