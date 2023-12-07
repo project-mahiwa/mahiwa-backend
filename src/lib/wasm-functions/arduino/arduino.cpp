@@ -68,10 +68,21 @@ uint8_t convertAnalogReferenceType(uint8_t mode)
 
 //     m3ApiSuccess();
 // }
+
+m3ApiRawFunction(m3_analogRead)
+{
+    m3ApiGetArg(uint8_t, pin);
+    m3ApiReturnType(uint16_t);
+
+    m3ApiReturn(analogRead(pin));
+
+    m3ApiSuccess();
+}
+
 m3ApiRawFunction(m3_analogWrite)
 {
-    m3ApiGetArg(uint32_t, pin);
-    m3ApiGetArg(uint32_t, value);
+    m3ApiGetArg(uint8_t, pin);
+    m3ApiGetArg(int, value);
 
     analogWrite(pin, value);
 
@@ -100,18 +111,17 @@ uint8_t convertPinMode(uint8_t mode)
 
 m3ApiRawFunction(m3_digitalRead)
 {
-    m3ApiGetArg(uint32_t, pin);
-    // returnはHIGHかLOWなので，HIGH:1 LOW:0にして返す
-    m3ApiReturnType(uint8_t);
+    m3ApiGetArg(uint8_t, pin);
+    m3ApiReturnType(int);
 
-    m3ApiReturn(digitalRead(pin) == HIGH ? 1 : 0);
+    m3ApiReturn(digitalRead(pin));
 
     m3ApiSuccess();
 }
 m3ApiRawFunction(m3_digitalWrite)
 {
-    m3ApiGetArg(uint32_t, pin);
-    m3ApiGetArg(uint32_t, value);
+    m3ApiGetArg(uint8_t, pin);
+    m3ApiGetArg(uint8_t, value);
 
     digitalWrite(pin, value);
 
@@ -120,8 +130,8 @@ m3ApiRawFunction(m3_digitalWrite)
 
 m3ApiRawFunction(m3_pinMode)
 {
-    m3ApiGetArg(uint32_t, pin);
-    m3ApiGetArg(uint32_t, mode);
+    m3ApiGetArg(uint8_t, pin);
+    m3ApiGetArg(uint8_t, mode);
 
     typedef uint8_t PinMode;
     pinMode(pin, (PinMode)convertPinMode(mode));
@@ -152,7 +162,7 @@ m3ApiRawFunction(m3_delayMicroseconds)
 }
 m3ApiRawFunction(m3_micros)
 {
-    m3ApiReturnType(uint32_t);
+    m3ApiReturnType(unsigned long);
 
     m3ApiReturn(micros());
 
@@ -160,7 +170,7 @@ m3ApiRawFunction(m3_micros)
 }
 m3ApiRawFunction(m3_millis)
 {
-    m3ApiReturnType(uint32_t);
+    m3ApiReturnType(unsigned long);
 
     m3ApiReturn(millis());
 
