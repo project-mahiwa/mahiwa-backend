@@ -35,6 +35,30 @@ uint8_t convertAnalogReferenceType(uint8_t mode)
 
     m3ApiSuccess();
 }
+/**
+ * Analog I/O
+ */
+// AnalogReferenceはマイコンによって種類が違う
+// uint8_t convertAnalogReferenceType(uint8_t mode)
+// {
+//     switch (mode)
+//     {
+//     case 0:
+//         return DEFAURT;
+//     case 1:
+//         return INTERNAL;
+//     case 2:
+//         return INTERNAL1V1;
+//     case 3:
+//         return INTERNAL2V56;
+//     case 4:
+//         return EXTERNAL;
+//     default:
+//         // 正直これ以外がきたら，ちゃんと例外にして止めたい
+//         return DEFAULT;
+//     }
+// }
+
 // m3ApiRawFunction(m3_analogReference)
 // {
 //     m3ApiGetArg(uint32_t, type);
@@ -151,7 +175,7 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
      * analog I/O
      */
     m3_LinkRawFunction(module, arduino, "analogRead", "v(i)", &m3_analogRead);
-    m3_LinkRawFunction(module, arduino, "analogReference", "v(ii)", &m3_analogWrite);
+    // m3_LinkRawFunction(module, arduino, "analogReference", "v(ii)", &m3_analogReference);
     m3_LinkRawFunction(module, arduino, "analogWrite", "v(ii)", &m3_analogWrite);
     /**
      * Digital I/O
