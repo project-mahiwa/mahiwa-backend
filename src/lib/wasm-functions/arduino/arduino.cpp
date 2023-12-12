@@ -201,6 +201,7 @@ m3ApiRawFunction(m3_analogRead)
     m3ApiGetArg(uint8_t, pin);
     m3ApiReturnType(uint16_t);
 
+    // digitalReadがintでanalogReadがuint16_tなのは違和感だが、公式実装がそうなので合わせるしか無い
     m3ApiReturn(analogRead(pin));
 
     m3ApiSuccess();
