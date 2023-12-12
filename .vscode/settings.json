@@ -1,3 +1,16 @@
 {
-  "cSpell.words": ["cppcheck", "mahiwa", "pico", "platformio", "tinygo", "wasi"]
+  "cSpell.words": [
+    "cppcheck",
+    "mahiwa",
+    "pico",
+    "platformio",
+    "tinygo",
+    "wasi"
+  ],
+  "files.associations": {
+    "*.tcc": "cpp",
+    "random": "cpp",
+    "algorithm": "cpp",
+    "numeric": "cpp"
+  }
 }

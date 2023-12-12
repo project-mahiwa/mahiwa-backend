@@ -1,7 +1,14 @@
 #pragma once
+//
 #include <Arduino.h>
-#include <lib/wasm-functions/arduino.hpp>
 #include <wasm3.h>
+
+//
+#include <lib/helper/wasm3-debugger.hpp>
+
+// 定義読み込み
+#include <lib/wasm-functions/arduino/arduino.hpp>
+#include <lib/wasm-functions/arduino/serial.hpp>
 
 // wasm3のexampleの値に従う
 // m3_NewRuntimeの第2引数
