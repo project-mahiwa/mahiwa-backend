@@ -1,5 +1,5 @@
 #include <lib/wasm-functions/arduino/serial.hpp>
-m3ApiRawFunction(m3_serial_print)
+m3ApiRawFunction(m3_print)
 {
     // cppcheck-suppress cstyleCast
     m3ApiGetArgMem(const uint8_t *, out);
@@ -17,7 +17,7 @@ M3Result mahiwa_LinkSerial(IM3Runtime runtime)
     IM3Module module = runtime->modules;
     const char *serial = "serial";
 
-    m3_LinkRawFunction(module, serial, "print", "v(*i)", &m3_serial_print);
+    m3_LinkRawFunction(module, serial, "print", "v(*i)", &m3_print);
 
     return m3Err_none;
 }
