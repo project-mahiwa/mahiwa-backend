@@ -8,6 +8,7 @@ void setup()
   while (!Serial)
   {
   }
+  Serial.println(cos(0));
 
   Serial.println("Project Mahiwa started!!!!!");
 #ifdef ESP32
