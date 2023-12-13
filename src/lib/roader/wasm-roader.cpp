@@ -1,6 +1,6 @@
 #include <lib/roader/wasm-roader.hpp>
 // wasmファイルをヘッダファイルにしたもの(ヘッダファイルでなくcpp内で読むこと @see https://github.com/project-mahiwa/mahiwa-backend/issues/49 )
-#include <wasm/rust-serial-print-and-arduino-delay.hpp>
+#include <wasm/user.h>
 // cppcheck-suppress unusedFunction
 void wasm_task(void *)
 {
@@ -18,8 +18,7 @@ void wasm_task(void *)
 
   IM3Module module;
   // tinygo_wasi_wasm, tinygo_wasi_wasm_lenはxxdで出せる
-  M3Result result = m3_ParseModule(env, &module, rust_hello_world_wasm,
-                                   rust_hello_world_wasm_len);
+  M3Result result = m3_ParseModule(env, &module, user_wasm, user_wasm_len);
   if (result)
   {
     wasm3_error_printer("m3_ParseModule", result);
