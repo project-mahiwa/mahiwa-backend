@@ -72,4 +72,12 @@ void wasm_task(void *)
       Serial.println(info.line);
     }
   }
+
+  Serial.println("Project Mahiwa : WebAssembly done");
+  // 止めるとpanicするので正常に終わった後はループし続けさせる
+  while (true)
+  {
+    delay(10000);
+    Serial.println("WebAssembly already done. if you want to re run, please restart.");
+  }
 }
