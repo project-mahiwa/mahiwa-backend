@@ -10,7 +10,7 @@ void setup()
   }
   Serial.println(cos(0));
 
-  Serial.println("Project Mahiwa started!!!!!");
+  Serial.println("Project Mahiwa started🎉");
 #ifdef ESP32
   Serial.println("ESP32 Mode");
   // xTaskCreatePinnedToCoreはFreeRTOSの関数

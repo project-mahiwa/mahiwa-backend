@@ -1,4 +1,5 @@
 #include <lib/wasm-functions/arduino/serial.hpp>
+// printlnはprintと改行をライブラリで組み合わせ作るようにする
 m3ApiRawFunction(m3_print)
 {
     // cppcheck-suppress cstyleCast
@@ -43,10 +44,10 @@ M3Result mahiwa_LinkSerial(IM3Runtime runtime)
     const char *serial = "serial";
 
     m3_LinkRawFunction(module, serial, "print", "v(*i)", &m3_print);
-    m3_LinkRawFunction(module, serial, "printInt", "v(*i)", &m3_printInt);
-    m3_LinkRawFunction(module, serial, "printLong", "v(*I)", &m3_printLong);
-    m3_LinkRawFunction(module, serial, "printFloat", "v(*f)", &m3_printFloat);
-    m3_LinkRawFunction(module, serial, "printDouble", "v(*F)", &m3_printDouble);
+    m3_LinkRawFunction(module, serial, "printInt", "v(i)", &m3_printInt);
+    m3_LinkRawFunction(module, serial, "printLong", "v(I)", &m3_printLong);
+    m3_LinkRawFunction(module, serial, "printFloat", "v(f)", &m3_printFloat);
+    m3_LinkRawFunction(module, serial, "printDouble", "v(F)", &m3_printDouble);
 
     return m3Err_none;
 }
