@@ -45,7 +45,7 @@ m3ApiRawFunction(m3_randomSeed)
  */
 m3ApiRawFunction(m3_cos)
 {
-    m3ApiGetArg(int, rad);
+    m3ApiGetArg(double, rad);
     m3ApiReturnType(double);
 
     m3ApiReturn(cos(rad));
@@ -55,7 +55,7 @@ m3ApiRawFunction(m3_cos)
 
 m3ApiRawFunction(m3_sin)
 {
-    m3ApiGetArg(int, rad);
+    m3ApiGetArg(double, rad);
     m3ApiReturnType(double);
 
     m3ApiReturn(sin(rad));
@@ -65,7 +65,7 @@ m3ApiRawFunction(m3_sin)
 
 m3ApiRawFunction(m3_tan)
 {
-    m3ApiGetArg(int, rad);
+    m3ApiGetArg(double, rad);
     m3ApiReturnType(double);
 
     m3ApiReturn(tan(rad));
