@@ -22,7 +22,10 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
-      - name: copy user.h
+      - name: ls
+        run: ls -laF
+
+      - name: copy user.h (gitignoreしているのでコピーして作る)
         run: cp ./user_h_for_ci ./src/wasm/uesr.h
 
       - name: ビルドチェック
