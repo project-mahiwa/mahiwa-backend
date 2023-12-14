@@ -320,7 +320,8 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
     /**
      * Random Numbers
      */
-    m3_LinkRawFunction(module, arduino, "random", "I()", &m3_random);
+    // randomがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
+    m3_LinkRawFunction(module, arduino, "randomArduino", "I()", &m3_random);
     m3_LinkRawFunction(module, arduino, "randomSeed", "v(I)", &m3_randomSeed);
     /**
      * Trigonometry
