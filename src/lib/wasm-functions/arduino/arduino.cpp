@@ -326,9 +326,9 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
     /**
      * Trigonometry
      */
-    m3_LinkRawFunction(module, arduino, "cos", "F(i)", &m3_cos);
-    m3_LinkRawFunction(module, arduino, "sin", "F(i)", &m3_sin);
-    m3_LinkRawFunction(module, arduino, "tan", "F(i)", &m3_tan);
+    m3_LinkRawFunction(module, arduino, "cos", "F(F)", &m3_cos);
+    m3_LinkRawFunction(module, arduino, "sin", "F(F)", &m3_sin);
+    m3_LinkRawFunction(module, arduino, "tan", "F(F)", &m3_tan);
     /**
      * Math
      */
