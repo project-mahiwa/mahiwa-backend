@@ -15,14 +15,26 @@ m3ApiRawFunction(m3_print)
 // 本当はprintNumでintもfloatも実装したいが，Cには複合型やオーバーロードの仕組みがない
 m3ApiRawFunction(m3_printInt)
 {
-    m3ApiGetArg(int, int_num);
-    Serial.print(int_num);
+    m3ApiGetArg(int, num);
+    Serial.print(num);
+    m3ApiSuccess();
+}
+m3ApiRawFunction(m3_printLong)
+{
+    m3ApiGetArg(long, num);
+    Serial.print(num);
+    m3ApiSuccess();
+}
+m3ApiRawFunction(m3_printFloat)
+{
+    m3ApiGetArg(float, num);
+    Serial.print(num);
     m3ApiSuccess();
 }
 m3ApiRawFunction(m3_printDouble)
 {
-    m3ApiGetArg(double, double_num);
-    Serial.print(double_num);
+    m3ApiGetArg(double, num);
+    Serial.print(num);
     m3ApiSuccess();
 }
 M3Result mahiwa_LinkSerial(IM3Runtime runtime)
@@ -32,6 +44,8 @@ M3Result mahiwa_LinkSerial(IM3Runtime runtime)
 
     m3_LinkRawFunction(module, serial, "print", "v(*i)", &m3_print);
     m3_LinkRawFunction(module, serial, "printInt", "v(*i)", &m3_printInt);
+    m3_LinkRawFunction(module, serial, "printLong", "v(*I)", &m3_printLong);
+    m3_LinkRawFunction(module, serial, "printFloat", "v(*f)", &m3_printFloat);
     m3_LinkRawFunction(module, serial, "printDouble", "v(*F)", &m3_printDouble);
 
     return m3Err_none;
