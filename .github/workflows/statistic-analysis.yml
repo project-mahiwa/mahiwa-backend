@@ -23,7 +23,7 @@ jobs:
         run: pip install --upgrade platformio
 
       - name: copy user.h (gitignoreしているのでコピーして作る)
-        run: cp ./user_h_for_ci ./src/wasm/uesr.h
+        run: cp ./user_h_for_ci ./src/wasm/user.h
 
       - name: 静的解析(cppcheck)
         run: |
