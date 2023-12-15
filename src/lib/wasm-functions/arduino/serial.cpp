@@ -29,13 +29,15 @@ m3ApiRawFunction(m3_printLong)
 m3ApiRawFunction(m3_printFloat)
 {
     m3ApiGetArg(float, num);
-    Serial.print(num);
+    m3ApiGetArg(uint8_t, format);
+    Serial.print(num, format);
     m3ApiSuccess();
 }
 m3ApiRawFunction(m3_printDouble)
 {
     m3ApiGetArg(double, num);
-    Serial.print(num);
+    m3ApiGetArg(uint8_t, format);
+    Serial.print(num, format);
     m3ApiSuccess();
 }
 M3Result mahiwa_LinkSerial(IM3Runtime runtime)
@@ -46,8 +48,8 @@ M3Result mahiwa_LinkSerial(IM3Runtime runtime)
     m3_LinkRawFunction(module, serial, "print", "v(*i)", &m3_print);
     m3_LinkRawFunction(module, serial, "printInt", "v(i)", &m3_printInt);
     m3_LinkRawFunction(module, serial, "printLong", "v(I)", &m3_printLong);
-    m3_LinkRawFunction(module, serial, "printFloat", "v(f)", &m3_printFloat);
-    m3_LinkRawFunction(module, serial, "printDouble", "v(F)", &m3_printDouble);
+    m3_LinkRawFunction(module, serial, "printFloat", "v(fi)", &m3_printFloat);
+    m3_LinkRawFunction(module, serial, "printDouble", "v(Fi)", &m3_printDouble);
 
     return m3Err_none;
 }
