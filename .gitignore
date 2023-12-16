@@ -35,3 +35,8 @@ build
 *.exe
 *.out
 *.app
+
+
+# 環境パスが入って毎回diffるので対象外
+.vscode/c_cpp_properties.json
+.vscode/launch.json
