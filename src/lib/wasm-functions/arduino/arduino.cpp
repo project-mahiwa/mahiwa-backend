@@ -335,8 +335,8 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
     m3_LinkRawFunction(module, arduino, "abs", "i(i)", &m3_abs);
     m3_LinkRawFunction(module, arduino, "constrain", "i(iii)", &m3_constrain);
     m3_LinkRawFunction(module, arduino, "map", "I(IIIII)", &m3_map);
-    m3_LinkRawFunction(module, arduino, "max", "I(I)", &m3_max);
-    m3_LinkRawFunction(module, arduino, "min", "I(I)", &m3_min);
+    m3_LinkRawFunction(module, arduino, "max", "I(II)", &m3_max);
+    m3_LinkRawFunction(module, arduino, "min", "I(II)", &m3_min);
     m3_LinkRawFunction(module, arduino, "pow", "F(I)", &m3_pow);
     m3_LinkRawFunction(module, arduino, "sq", "i(i)", &m3_sq);
     m3_LinkRawFunction(module, arduino, "sqrt", "F(i)", &m3_sqrt);
