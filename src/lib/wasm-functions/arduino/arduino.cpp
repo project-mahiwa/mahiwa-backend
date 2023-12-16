@@ -338,7 +338,7 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
     m3_LinkRawFunction(module, arduino, "max", "I(II)", &m3_max);
     m3_LinkRawFunction(module, arduino, "min", "I(II)", &m3_min);
     // powがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
-    m3_LinkRawFunction(module, arduino, "powArduino", "F(I)", &m3_pow);
+    m3_LinkRawFunction(module, arduino, "powArduino", "F(II)", &m3_pow);
     m3_LinkRawFunction(module, arduino, "sq", "i(i)", &m3_sq);
     // sqrtがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
     m3_LinkRawFunction(module, arduino, "sqrtArduino", "F(i)", &m3_sqrt);
