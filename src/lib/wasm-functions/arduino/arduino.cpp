@@ -117,6 +117,8 @@ m3ApiRawFunction(m3_max)
     m3ApiGetArg(long, y);
     m3ApiReturnType(long);
 
+    Serial.print("max:");
+    Serial.println(max(x, y));
     m3ApiReturn(max(x, y));
 
     m3ApiSuccess();
@@ -320,25 +322,28 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
     /**
      * Random Numbers
      */
-    m3_LinkRawFunction(module, arduino, "random", "I()", &m3_random);
+    // randomがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
+    m3_LinkRawFunction(module, arduino, "randomArduino", "I()", &m3_random);
     m3_LinkRawFunction(module, arduino, "randomSeed", "v(I)", &m3_randomSeed);
     /**
      * Trigonometry
      */
-    m3_LinkRawFunction(module, arduino, "cos", "F(i)", &m3_cos);
-    m3_LinkRawFunction(module, arduino, "sin", "F(i)", &m3_sin);
-    m3_LinkRawFunction(module, arduino, "tan", "F(i)", &m3_tan);
+    m3_LinkRawFunction(module, arduino, "cos", "F(F)", &m3_cos);
+    m3_LinkRawFunction(module, arduino, "sin", "F(F)", &m3_sin);
+    m3_LinkRawFunction(module, arduino, "tan", "F(F)", &m3_tan);
     /**
      * Math
      */
     m3_LinkRawFunction(module, arduino, "abs", "i(i)", &m3_abs);
     m3_LinkRawFunction(module, arduino, "constrain", "i(iii)", &m3_constrain);
     m3_LinkRawFunction(module, arduino, "map", "I(IIIII)", &m3_map);
-    m3_LinkRawFunction(module, arduino, "max", "I(I)", &m3_max);
-    m3_LinkRawFunction(module, arduino, "min", "I(I)", &m3_min);
-    m3_LinkRawFunction(module, arduino, "pow", "F(I)", &m3_pow);
+    m3_LinkRawFunction(module, arduino, "max", "I(II)", &m3_max);
+    m3_LinkRawFunction(module, arduino, "min", "I(II)", &m3_min);
+    // powがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
+    m3_LinkRawFunction(module, arduino, "powArduino", "F(II)", &m3_pow);
     m3_LinkRawFunction(module, arduino, "sq", "i(i)", &m3_sq);
-    m3_LinkRawFunction(module, arduino, "sqrt", "F(i)", &m3_sqrt);
+    // sqrtがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
+    m3_LinkRawFunction(module, arduino, "sqrtArduino", "F(i)", &m3_sqrt);
     /**
      * analog I/O
      */
