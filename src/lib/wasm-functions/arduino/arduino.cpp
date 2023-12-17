@@ -117,6 +117,8 @@ m3ApiRawFunction(m3_max)
     m3ApiGetArg(long, y);
     m3ApiReturnType(long);
 
+    Serial.print("max:");
+    Serial.println(max(x, y));
     m3ApiReturn(max(x, y));
 
     m3ApiSuccess();
