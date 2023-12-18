@@ -8,13 +8,11 @@ void setup()
   while (!Serial)
   {
   }
-  Serial.println(cos(0));
-
   Serial.println("Project Mahiwa started🎉");
 #ifdef ESP32
   Serial.println("ESP32 Mode");
   Serial.print("CPU Frequency:");
-  Serial.print(ESP.getCpuFreqMHz());
+  Serial.print(getCpuFrequencyMhz());
   Serial.println(" MHz");
   // xTaskCreatePinnedToCoreはFreeRTOSの関数
   // ESP32ではデフォルトでFreeRTOSが組み込まれているため下記のような形となる．
