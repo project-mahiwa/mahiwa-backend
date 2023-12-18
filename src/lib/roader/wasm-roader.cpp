@@ -69,9 +69,8 @@ void wasm_task(void *)
 #ifdef USE_COREMARK
   float value = 0;
   result = m3_GetResultsV(f, &value);
-  Serial.println("coremark score:");
+  Serial.print("coremark score:");
   Serial.println(value, 10);
-  Serial.println("");
 #endif
   // 失敗時の処理
   if (result != m3Err_none)
