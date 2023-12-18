@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "COREMARK",
     "cppcheck",
     "mahiwa",
     "pico",
@@ -14,6 +15,14 @@
     "numeric": "cpp",
     "cmath": "cpp",
     "cinttypes": "cpp",
-    "cstdlib": "cpp"
+    "cstdlib": "cpp",
+    "exception": "cpp",
+    "functional": "cpp",
+    "iterator": "cpp",
+    "memory": "cpp",
+    "limits": "cpp",
+    "streambuf": "cpp",
+    "tuple": "cpp",
+    "type_traits": "cpp"
   }
 }

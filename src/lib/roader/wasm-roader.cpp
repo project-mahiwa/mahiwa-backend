@@ -41,9 +41,22 @@ void wasm_task(void *)
   {
     wasm3_error_printer("mahiwa_LinkSerial", result);
   }
+#ifdef USE_COREMARK
+  Serial.println("call coremark function link");
+  result = mahiwa_LinkCoremark(runtime);
+  if (result)
+  {
+    wasm3_error_printer("mahiwa_LinkCoremark", result);
+  }
+#endif
 
   IM3Function f;
+#ifdef USE_COREMARK
+  Serial.println("coremark mode is enabled!!");
+  result = m3_FindFunction(&f, runtime, "run");
+#else
   result = m3_FindFunction(&f, runtime, "_start");
+#endif
   if (result)
   {
     wasm3_error_printer("m3_FindFunction", result);
@@ -53,9 +66,14 @@ void wasm_task(void *)
 
   // 実行が成功したら終わる
   result = m3_CallV(f);
-
+#ifdef USE_COREMARK
+  float value = 0;
+  result = m3_GetResultsV(f, &value);
+  Serial.print("coremark score:");
+  Serial.println(value, 10);
+#endif
   // 失敗時の処理
-  if (result)
+  if (result != m3Err_none)
   {
     M3ErrorInfo info;
     m3_GetErrorInfo(runtime, &info);

@@ -11,12 +11,11 @@ void setup()
   Serial.println(cos(0));
 
   Serial.println("Project Mahiwa started🎉");
-  Serial.print("cos(0.0)");
-  Serial.println(cos(0.0));
-  Serial.print("max(100,200)");
-  Serial.println(max(100, 200));
 #ifdef ESP32
   Serial.println("ESP32 Mode");
+  Serial.print("CPU Frequency:");
+  Serial.print(ESP.getCpuFreqMHz());
+  Serial.println(" MHz");
   // xTaskCreatePinnedToCoreはFreeRTOSの関数
   // ESP32ではデフォルトでFreeRTOSが組み込まれているため下記のような形となる．
   // wasm3-arduinoのexampleでは16kbごとに区切るためと書かれている．

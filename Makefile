@@ -30,3 +30,15 @@ r-c3:
 
 debug-atom:
 	pio debug -e m5stack-atom
+
+coremark:
+	cp /opt/usuyuki/mahiwa_space/wasm-coremark/coremark-minimal.wasm /opt/usuyuki/.cache/mahiwa/user.wasm
+	wasm2wat /opt/usuyuki/.cache/mahiwa/user.wasm -o /opt/usuyuki/.cache/mahiwa/user.wat
+	(cd /opt/usuyuki/.cache/mahiwa && xxd -i user.wasm > user.h)
+	cp /opt/usuyuki/.cache/mahiwa/user.h /opt/usuyuki/mahiwa_space/mahiwa-backend/src/wasm/user.h
+
+coremarkh:
+	cp /home/usuyuki/mahiwa_space/wasm-coremark/coremark-minimal.wasm /home/usuyuki/.cache/mahiwa/user.wasm
+	wasm2wat /home/usuyuki/.cache/mahiwa/user.wasm -o /home/usuyuki/.cache/mahiwa/user.wat
+	(cd /home/usuyuki/.cache/mahiwa && xxd -i user.wasm > user.h)
+	cp /home/usuyuki/.cache/mahiwa/user.h /home/usuyuki/mahiwa_space/mahiwa-backend/src/wasm/user.h
