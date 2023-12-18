@@ -18,6 +18,6 @@
 // https://github.com/wasm3/wasm3-arduino/blob/main/src/m3_env.c#L170
 // ここの値を大きくするとRAMの小さいマイコンでFatal: m3_LoadModule memory allocation failed になる
 #define WASM_STACK_SLOTS 2048
-#define NATIVE_STACK_SIZE (32 * 2028)
+#define NATIVE_STACK_SIZE (32 * 2048)
 
 void wasm_task(void *);
