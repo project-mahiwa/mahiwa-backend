@@ -1,4 +1,5 @@
 #include <lib/roader/wasm-roader.hpp>
+#define USE_COREMARK
 // cppcheck-suppress unusedFunction
 void setup()
 {
