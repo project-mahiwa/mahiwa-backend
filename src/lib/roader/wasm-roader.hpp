@@ -9,6 +9,9 @@
 // 定義読み込み
 #include <lib/wasm-functions/arduino/arduino.hpp>
 #include <lib/wasm-functions/arduino/serial.hpp>
+#ifdef USE_COREMARK
+#include <lib/wasm-functions/mahiwa/coremark/coremark.hpp>
+#endif
 
 // wasm3のexampleの値に従う
 // m3_NewRuntimeの第2引数
