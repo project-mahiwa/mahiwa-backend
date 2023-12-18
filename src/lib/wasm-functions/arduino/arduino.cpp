@@ -238,6 +238,19 @@ uint8_t convertPinMode(uint8_t mode)
         return INPUT;
     }
 }
+uint8_t convertDigitalIOValue(uint8_t value)
+{
+    switch (value)
+    {
+    case 0:
+        return LOW;
+    case 1:
+        return HIGH;
+    default:
+        // 正直これ以外がきたら，ちゃんと例外にして止めたい
+        return LOW;
+    }
+}
 
 m3ApiRawFunction(m3_digitalRead)
 {
@@ -253,7 +266,7 @@ m3ApiRawFunction(m3_digitalWrite)
     m3ApiGetArg(uint8_t, pin);
     m3ApiGetArg(uint8_t, value);
 
-    digitalWrite(pin, value);
+    digitalWrite(pin, convertDigitalIOValue(value));
 
     m3ApiSuccess();
 }
@@ -263,8 +276,7 @@ m3ApiRawFunction(m3_pinMode)
     m3ApiGetArg(uint8_t, pin);
     m3ApiGetArg(uint8_t, mode);
 
-    typedef uint8_t PinMode;
-    pinMode(pin, (PinMode)convertPinMode(mode));
+    pinMode(pin, convertPinMode(mode));
 
     m3ApiSuccess();
 }
