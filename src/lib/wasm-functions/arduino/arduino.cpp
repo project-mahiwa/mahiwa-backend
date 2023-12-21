@@ -11,7 +11,7 @@ m3ApiRawFunction(m3_random)
     // random(min, max)
     // と引数の数に応じて内容が変わるが，コードを見る限り引数はvoidなので
     // random()として実装
-    m3ApiReturnType(long);
+    m3ApiReturnType(int32_t);
 
     m3ApiReturn(random());
 
@@ -19,7 +19,7 @@ m3ApiRawFunction(m3_random)
 }
 m3ApiRawFunction(m3_randomSeed)
 {
-    m3ApiGetArg(long, seed);
+    m3ApiGetArg(int32_t, seed);
 
     randomSeed(seed);
 
@@ -45,30 +45,30 @@ m3ApiRawFunction(m3_randomSeed)
  */
 m3ApiRawFunction(m3_cos)
 {
-    m3ApiGetArg(double, rad);
-    m3ApiReturnType(double);
+    m3ApiGetArg(double_t, rad);
+    m3ApiReturnType(double_t);
 
-    m3ApiReturn(cos(rad));
+    m3ApiReturn(cos((double)rad));
 
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(m3_sin)
 {
-    m3ApiGetArg(double, rad);
-    m3ApiReturnType(double);
+    m3ApiGetArg(double_t, rad);
+    m3ApiReturnType(double_t);
 
-    m3ApiReturn(sin(rad));
+    m3ApiReturn(sin((double)rad));
 
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(m3_tan)
 {
-    m3ApiGetArg(double, rad);
-    m3ApiReturnType(double);
+    m3ApiGetArg(double_t, rad);
+    m3ApiReturnType(double_t);
 
-    m3ApiReturn(tan(rad));
+    m3ApiReturn(tan((double)rad));
 
     m3ApiSuccess();
 }
@@ -77,77 +77,75 @@ m3ApiRawFunction(m3_tan)
  */
 m3ApiRawFunction(m3_abs)
 {
-    m3ApiGetArg(int, x);
-    m3ApiReturnType(int);
+    m3ApiGetArg(int32_t, x);
+    m3ApiReturnType(int32_t);
 
-    m3ApiReturn(abs(x));
+    m3ApiReturn(abs((int)x));
 
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(m3_constrain)
 {
-    m3ApiGetArg(int, x);
-    m3ApiGetArg(int, a);
-    m3ApiGetArg(int, b);
-    m3ApiReturnType(int);
+    m3ApiGetArg(int32_t, x);
+    m3ApiGetArg(int32_t, a);
+    m3ApiGetArg(int32_t, b);
+    m3ApiReturnType(int32_t);
 
-    m3ApiReturn(constrain(x, a, b));
+    m3ApiReturn(constrain((int)x, (int)a, (int)b));
 
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(m3_map)
 {
-    m3ApiGetArg(long, value);
-    m3ApiGetArg(long, fromLow);
-    m3ApiGetArg(long, fromHight);
-    m3ApiGetArg(long, toLow);
-    m3ApiGetArg(long, toHigh);
-    m3ApiReturnType(long);
+    m3ApiGetArg(int32_t, value);
+    m3ApiGetArg(int32_t, fromLow);
+    m3ApiGetArg(int32_t, fromHight);
+    m3ApiGetArg(int32_t, toLow);
+    m3ApiGetArg(int32_t, toHigh);
+    m3ApiReturnType(int32_t);
 
-    m3ApiReturn(map(value, fromLow, fromHight, toLow, toHigh));
+    m3ApiReturn(map((long)value, (long)fromLow, (long)fromHight, (long)toLow, (long)toHigh));
 
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(m3_max)
 {
-    m3ApiGetArg(long, x);
-    m3ApiGetArg(long, y);
-    m3ApiReturnType(long);
+    m3ApiGetArg(int32_t, x);
+    m3ApiGetArg(int32_t, y);
+    m3ApiReturnType(int32_t);
 
-    Serial.print("max:");
-    Serial.println(max(x, y));
-    m3ApiReturn(max(x, y));
+    m3ApiReturn(max((long)x, (long)y));
 
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(m3_min)
 {
-    m3ApiGetArg(long, x);
-    m3ApiGetArg(long, y);
-    m3ApiReturnType(long);
+    m3ApiGetArg(int32_t, x);
+    m3ApiGetArg(int32_t, y);
+    m3ApiReturnType(int32_t);
 
-    m3ApiReturn(min(x, y));
+    m3ApiReturn(min((long)x, (long)y));
 
     m3ApiSuccess();
 }
 m3ApiRawFunction(m3_pow)
 {
-    m3ApiGetArg(long, base);
-    m3ApiGetArg(long, exponent);
-    m3ApiReturnType(double);
+    m3ApiGetArg(int32_t, base);
+    m3ApiGetArg(int32_t, exponent);
+    m3ApiReturnType(double_t);
 
-    m3ApiReturn(pow(base, exponent));
+    m3ApiReturn(pow((long)base, (long)exponent));
 
     m3ApiSuccess();
 }
 m3ApiRawFunction(m3_sq)
 {
-    m3ApiGetArg(int, x);
-    m3ApiReturnType(int);
+    m3ApiGetArg(int32_t, x);
+    m3ApiReturnType(int32_t);
 
     // これ型の指定なしだけどどうする？
     m3ApiReturn(sq(x));
@@ -156,8 +154,8 @@ m3ApiRawFunction(m3_sq)
 }
 m3ApiRawFunction(m3_sqrt)
 {
-    m3ApiGetArg(int, x);
-    m3ApiReturnType(double);
+    m3ApiGetArg(int32_t, x);
+    m3ApiReturnType(double_t);
 
     // これ型の指定なしだけどどうする？
     m3ApiReturn(sqrt(x));
@@ -200,21 +198,21 @@ m3ApiRawFunction(m3_sqrt)
 
 m3ApiRawFunction(m3_analogRead)
 {
-    m3ApiGetArg(uint8_t, pin);
-    m3ApiReturnType(uint16_t);
+    m3ApiGetArg(int32_t, pin);
+    m3ApiReturnType(int32_t);
 
     // digitalReadがintでanalogReadがuint16_tなのは違和感だが、公式実装がそうなので合わせるしか無い
-    m3ApiReturn(analogRead(pin));
+    m3ApiReturn(analogRead((uint8_t)pin));
 
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(m3_analogWrite)
 {
-    m3ApiGetArg(uint8_t, pin);
-    m3ApiGetArg(int, value);
+    m3ApiGetArg(int32_t, pin);
+    m3ApiGetArg(int32_t, value);
 
-    analogWrite(pin, value);
+    analogWrite((uint8_t)pin, (int)value);
 
     m3ApiSuccess();
 }
@@ -241,30 +239,29 @@ uint8_t convertPinMode(uint8_t mode)
 
 m3ApiRawFunction(m3_digitalRead)
 {
-    m3ApiGetArg(uint8_t, pin);
-    m3ApiReturnType(int);
+    m3ApiGetArg(int32_t, pin);
+    m3ApiReturnType(int32_t);
 
-    m3ApiReturn(digitalRead(pin));
+    m3ApiReturn(digitalRead((uint8_t)pin));
 
     m3ApiSuccess();
 }
 m3ApiRawFunction(m3_digitalWrite)
 {
-    m3ApiGetArg(uint8_t, pin);
-    m3ApiGetArg(uint8_t, value);
+    m3ApiGetArg(int32_t, pin);
+    m3ApiGetArg(int32_t, value);
 
-    digitalWrite(pin, value);
+    digitalWrite((uint8_t)pin, (uint8_t)value);
 
     m3ApiSuccess();
 }
 
 m3ApiRawFunction(m3_pinMode)
 {
-    m3ApiGetArg(uint8_t, pin);
-    m3ApiGetArg(uint8_t, mode);
+    m3ApiGetArg(int32_t, pin);
+    m3ApiGetArg(int32_t, mode);
 
-    typedef uint8_t PinMode;
-    pinMode(pin, (PinMode)convertPinMode(mode));
+    pinMode((uint8_t)pin, convertPinMode((uint8_t)mode));
 
     m3ApiSuccess();
 }
@@ -275,24 +272,24 @@ m3ApiRawFunction(m3_pinMode)
 m3ApiRawFunction(m3_delay)
 {
     // cppcheck-suppress cstyleCast
-    m3ApiGetArg(uint32_t, ms);
+    m3ApiGetArg(int64_t, ms);
 
-    delay(ms);
+    delay((uint32_t)ms);
 
     m3ApiSuccess();
 }
 m3ApiRawFunction(m3_delayMicroseconds)
 {
     // cppcheck-suppress cstyleCast
-    m3ApiGetArg(uint32_t, us);
+    m3ApiGetArg(int64_t, us);
 
-    delayMicroseconds(us);
+    delayMicroseconds((uint32_t)us);
 
     m3ApiSuccess();
 }
 m3ApiRawFunction(m3_micros)
 {
-    m3ApiReturnType(unsigned long);
+    m3ApiReturnType(int64_t);
 
     m3ApiReturn(micros());
 
@@ -300,7 +297,7 @@ m3ApiRawFunction(m3_micros)
 }
 m3ApiRawFunction(m3_millis)
 {
-    m3ApiReturnType(unsigned long);
+    m3ApiReturnType(int64_t);
 
     m3ApiReturn(millis());
 
@@ -323,8 +320,8 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
      * Random Numbers
      */
     // randomがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
-    m3_LinkRawFunction(module, arduino, "randomArduino", "I()", &m3_random);
-    m3_LinkRawFunction(module, arduino, "randomSeed", "v(I)", &m3_randomSeed);
+    m3_LinkRawFunction(module, arduino, "randomArduino", "i()", &m3_random);
+    m3_LinkRawFunction(module, arduino, "randomSeed", "v(i)", &m3_randomSeed);
     /**
      * Trigonometry
      */
@@ -336,11 +333,11 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
      */
     m3_LinkRawFunction(module, arduino, "abs", "i(i)", &m3_abs);
     m3_LinkRawFunction(module, arduino, "constrain", "i(iii)", &m3_constrain);
-    m3_LinkRawFunction(module, arduino, "map", "I(IIIII)", &m3_map);
-    m3_LinkRawFunction(module, arduino, "max", "I(II)", &m3_max);
-    m3_LinkRawFunction(module, arduino, "min", "I(II)", &m3_min);
+    m3_LinkRawFunction(module, arduino, "map", "i(iiiii)", &m3_map);
+    m3_LinkRawFunction(module, arduino, "max", "i(ii)", &m3_max);
+    m3_LinkRawFunction(module, arduino, "min", "i(ii)", &m3_min);
     // powがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
-    m3_LinkRawFunction(module, arduino, "powArduino", "F(II)", &m3_pow);
+    m3_LinkRawFunction(module, arduino, "powArduino", "F(ii)", &m3_pow);
     m3_LinkRawFunction(module, arduino, "sq", "i(i)", &m3_sq);
     // sqrtがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
     m3_LinkRawFunction(module, arduino, "sqrtArduino", "F(i)", &m3_sqrt);
@@ -360,8 +357,8 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
     /**
      * Time
      */
-    m3_LinkRawFunction(module, arduino, "delay", "v(i)", &m3_delay);
-    m3_LinkRawFunction(module, arduino, "delayMicroseconds", "v(i)", &m3_delayMicroseconds);
+    m3_LinkRawFunction(module, arduino, "delay", "v(I)", &m3_delay);
+    m3_LinkRawFunction(module, arduino, "delayMicroseconds", "v(I)", &m3_delayMicroseconds);
     m3_LinkRawFunction(module, arduino, "millis", "I()", &m3_millis);
     m3_LinkRawFunction(module, arduino, "micros", "I()", &m3_micros);
 
