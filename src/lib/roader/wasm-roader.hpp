@@ -10,7 +10,7 @@
 #include <lib/wasm-functions/arduino/arduino.hpp>
 #include <lib/wasm-functions/arduino/serial.hpp>
 #ifdef USE_COREMARK
-#include <lib/wasm-functions/mahiwa/coremark/coremark.hpp>
+#include <lib/wasm-functions/coremark/coremark.hpp>
 #endif
 
 // wasm3のexampleの値に従う
