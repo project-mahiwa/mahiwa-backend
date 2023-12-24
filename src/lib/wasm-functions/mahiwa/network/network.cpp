@@ -1,8 +1,8 @@
 #include <lib/wasm-functions/mahiwa/network/network.hpp>
-m3ApiRawFunction(m3_print)
+m3ApiRawFunction(m3_)
 {
     // cppcheck-suppress cstyleCast
-    m3ApiGetArgMem(const uint8_t *, out);
+m3ApiGetArgMem(const uint8_t *, out);
     // cppcheck-suppress cstyleCast
     m3ApiGetArg(uint32_t, out_len);
     byte buff[out_len + 1];
