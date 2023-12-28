@@ -9,6 +9,7 @@
 // 定義読み込み
 #include <lib/wasm-functions/arduino/arduino.hpp>
 #include <lib/wasm-functions/arduino/serial.hpp>
+#include <lib/wasm-functions/mahiwa/network/network.hpp>
 #ifdef USE_COREMARK
 #include <lib/wasm-functions/coremark/coremark.hpp>
 #endif

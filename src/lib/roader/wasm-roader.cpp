@@ -41,6 +41,13 @@ void wasm_task(void *)
   {
     wasm3_error_printer("mahiwa_LinkSerial", result);
   }
+#ifdef MAHIWA_WIFI
+  result = mahiwa_LinkNetwork(runtime);
+  if (result)
+  {
+    wasm3_error_printer("mahiwa_LinkNetwork", result);
+  }
+#endif
 #ifdef USE_COREMARK
   Serial.println("call coremark function link");
   result = mahiwa_LinkCoremark(runtime);

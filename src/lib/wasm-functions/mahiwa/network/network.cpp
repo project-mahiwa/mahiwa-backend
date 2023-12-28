@@ -17,7 +17,10 @@ M3Result mahiwa_LinkNetwork(IM3Runtime runtime)
     IM3Module modules = runtime->modules;
     const char *module = "network";
 
-    m3_LinkRawFunction(modules, module, "print", "v(*i)", &m3_print);
+    m3_LinkRawFunction(modules, module, "mode", "v(*i)", &m3_print);
+    m3_LinkRawFunction(modules, module, "begin", "v(*i)", &m3_print);
+    m3_LinkRawFunction(modules, module, "status", "v(*i)", &m3_print);
+    m3_LinkRawFunction(modules, module, "localIp", "v(*i)", &m3_print);
 
     return m3Err_none;
 }

@@ -1,3 +1,4 @@
+#include <config/mcu-function-mapper.hpp>
 #include <lib/roader/wasm-roader.hpp>
 // cppcheck-suppress unusedFunction
 void setup()
