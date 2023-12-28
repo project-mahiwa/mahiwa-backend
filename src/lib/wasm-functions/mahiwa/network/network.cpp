@@ -1,14 +1,105 @@
 #include <lib/wasm-functions/mahiwa/network/network.hpp>
-m3ApiRawFunction(m3_)
+wifi_mode_t convertWiFiMode(int32_t mode)
 {
-    // cppcheck-suppress cstyleCast
-m3ApiGetArgMem(const uint8_t *, out);
-    // cppcheck-suppress cstyleCast
-    m3ApiGetArg(uint32_t, out_len);
-    byte buff[out_len + 1];
-    memcpy(buff, out, out_len);
-    buff[out_len] = '\0';
-    Serial.print((char *)buff);
+    switch (mode)
+    {
+    case 0:
+        return WIFI_OFF;
+    case 1:
+        return WIFI_STA;
+    case 2:
+        return WIFI_AP;
+    case 3:
+        return WIFI_AP_STA;
+    default:
+        // 正直これ以外がきたら，ちゃんと例外にして止めたい
+        return WIFI_OFF;
+    }
+}
+// これいらないが，referenceとして残している
+// uint8_t convertWiFiStatus(uint8_t mode)
+// {
+//     switch (mode)
+//     {
+//     case 255:
+//         // Arduinoの実装に合わせて255にする
+//         return WL_NO_SHIELD;
+//     case 0:
+//         return WL_IDLE_STATUS;
+//     case 1:
+//         return WL_NO_SSID_AVAIL;
+//     case 2:
+//         return WL_SCAN_COMPLETED;
+//     case 3:
+//         return WL_CONNECTED;
+//     case 4:
+//         return WL_CONNECT_FAILED;
+//     case 5:
+//         return WL_CONNECTION_LOST;
+//     case 6:
+//         return WL_DISCONNECTED;
+//     default:
+//         // 正直これ以外がきたら，ちゃんと例外にして止めたい
+//         return WL_NO_SHIELD;
+//     }
+// }
+
+m3ApiRawFunction(m3_wlanMode)
+{
+    m3ApiGetArg(int32_t, mode);
+
+    WiFi.mode(convertWiFiMode(mode));
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_wlanConnect)
+{
+    m3ApiGetArgMem(const byte *, ssid);
+    m3ApiGetArg(int32_t, ssidLen);
+    m3ApiGetArgMem(const byte *, password);
+    m3ApiGetArg(int32_t, passwordLen);
+
+    byte lSsid[ssidLen + 1];
+    byte lPassword[passwordLen + 1];
+
+    memcpy(lSsid, ssid, ssidLen);
+    lSsid[ssidLen] = '\0';
+    memcpy(lPassword, password, passwordLen);
+    lPassword[passwordLen] = '\0';
+
+    WiFi.begin((char *)lSsid, (char *)lPassword);
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_wlanStatus)
+{
+    m3ApiReturnType(int32_t);
+
+    m3ApiReturn(WiFi.status());
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_wlanIsConnected)
+{
+    m3ApiReturnType(int32_t);
+
+    m3ApiReturn(WiFi.status() == WL_CONNECTED);
+
+    m3ApiSuccess();
+}
+
+m3ApiRawFunction(m3_wlanLocalIp)
+{
+    m3ApiGetArgMem(char *, out);
+
+    const char *ip = WiFi.localIP().toString().c_str();
+    uint32_t len = strlen(ip);
+    memcpy(out, ip, len);
+    out[len] = '\0';
+
     m3ApiSuccess();
 }
 
@@ -17,10 +108,11 @@ M3Result mahiwa_LinkNetwork(IM3Runtime runtime)
     IM3Module modules = runtime->modules;
     const char *module = "network";
 
-    m3_LinkRawFunction(modules, module, "mode", "v(*i)", &m3_print);
-    m3_LinkRawFunction(modules, module, "begin", "v(*i)", &m3_print);
-    m3_LinkRawFunction(modules, module, "status", "v(*i)", &m3_print);
-    m3_LinkRawFunction(modules, module, "localIp", "v(*i)", &m3_print);
+    m3_LinkRawFunction(modules, module, "wlanMode", "v(i)", &m3_wlanMode);
+    m3_LinkRawFunction(modules, module, "wlanConnect", "i(*i*i)", &m3_wlanMode);
+    m3_LinkRawFunction(modules, module, "wlanStatus", "i()", &m3_wlanStatus);
+    m3_LinkRawFunction(modules, module, "wlanIsConnected", "i()", &m3_wlanIsConnected);
+    m3_LinkRawFunction(modules, module, "wlanLocalIp", "v(*)", &m3_wlanLocalIp);
 
     return m3Err_none;
 }
