@@ -16,22 +16,6 @@ wifi_mode_t convertWiFiMode(int32_t mode)
         return WIFI_STA;
     }
 }
-// これいらないが，referenceとして残している
-// uint8_t convertWiFiStatus(uint8_t mode)
-// {
-//     switch (mode)
-//     {
-//     case 255:
-//         // Arduinoの実装に合わせて255にする
-//         return WL_NO_SHIELD;
-//     case 0:
-//         return WL_IDLE_STATUS;
-//     case 1:
-//         return WL_NO_SSID_AVAIL;
-//     case 2:
-//         return WL_SCAN_COMPLETED;
-//     case 3:
-//         return WL_CONNECTED;m3_wlanMode
 
 m3ApiRawFunction(m3_wlanMode)
 {
