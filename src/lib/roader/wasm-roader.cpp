@@ -42,6 +42,7 @@ void wasm_task(void *)
     wasm3_error_printer("mahiwa_LinkSerial", result);
   }
 #ifdef MAHIWA_WIFI
+  Serial.println("WIFI MODE is enabled");
   result = mahiwa_LinkNetwork(runtime);
   if (result)
   {

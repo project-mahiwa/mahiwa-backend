@@ -13,7 +13,7 @@ wifi_mode_t convertWiFiMode(int32_t mode)
         return WIFI_AP_STA;
     default:
         // 正直これ以外がきたら，ちゃんと例外にして止めたい
-        return WIFI_OFF;
+        return WIFI_STA;
     }
 }
 // これいらないが，referenceとして残している
@@ -31,23 +31,14 @@ wifi_mode_t convertWiFiMode(int32_t mode)
 //     case 2:
 //         return WL_SCAN_COMPLETED;
 //     case 3:
-//         return WL_CONNECTED;
-//     case 4:
-//         return WL_CONNECT_FAILED;
-//     case 5:
-//         return WL_CONNECTION_LOST;
-//     case 6:
-//         return WL_DISCONNECTED;
-//     default:
-//         // 正直これ以外がきたら，ちゃんと例外にして止めたい
-//         return WL_NO_SHIELD;
-//     }
-// }
+//         return WL_CONNECTED;m3_wlanMode
 
 m3ApiRawFunction(m3_wlanMode)
 {
     m3ApiGetArg(int32_t, mode);
 
+    // Serial.print("WIFI MODE:");
+    // Serial.println(convertWiFiMode(mode));
     WiFi.mode(convertWiFiMode(mode));
 
     m3ApiSuccess();
@@ -68,6 +59,10 @@ m3ApiRawFunction(m3_wlanConnect)
     memcpy(lPassword, password, passwordLen);
     lPassword[passwordLen] = '\0';
 
+    // Serial.print("SSID:");
+    // Serial.println((char *)lSsid);
+    // Serial.print("PASS:");
+    // Serial.println((char *)lPassword);
     WiFi.begin((char *)lSsid, (char *)lPassword);
 
     m3ApiSuccess();
@@ -82,22 +77,14 @@ m3ApiRawFunction(m3_wlanStatus)
     m3ApiSuccess();
 }
 
-m3ApiRawFunction(m3_wlanIsConnected)
-{
-    m3ApiReturnType(int32_t);
-
-    m3ApiReturn(WiFi.status() == WL_CONNECTED);
-
-    m3ApiSuccess();
-}
-
 m3ApiRawFunction(m3_wlanLocalIp)
 {
     m3ApiGetArgMem(char *, out);
 
-    const char *ip = WiFi.localIP().toString().c_str();
-    uint32_t len = strlen(ip);
-    memcpy(out, ip, len);
+    String ipString = WiFi.localIP().toString(); // 一旦代入してからc_strしないとスコープ的にまずくて壊れる
+    const char *ipChar = ipString.c_str();
+    uint32_t len = strlen(ipChar);
+    memcpy(out, ipChar, len);
     out[len] = '\0';
 
     m3ApiSuccess();
@@ -109,9 +96,8 @@ M3Result mahiwa_LinkNetwork(IM3Runtime runtime)
     const char *module = "network";
 
     m3_LinkRawFunction(modules, module, "wlanMode", "v(i)", &m3_wlanMode);
-    m3_LinkRawFunction(modules, module, "wlanConnect", "i(*i*i)", &m3_wlanMode);
+    m3_LinkRawFunction(modules, module, "wlanConnect", "v(*i*i)", &m3_wlanConnect);
     m3_LinkRawFunction(modules, module, "wlanStatus", "i()", &m3_wlanStatus);
-    m3_LinkRawFunction(modules, module, "wlanIsConnected", "i()", &m3_wlanIsConnected);
     m3_LinkRawFunction(modules, module, "wlanLocalIp", "v(*)", &m3_wlanLocalIp);
 
     return m3Err_none;
