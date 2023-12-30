@@ -41,7 +41,7 @@ void wasm_task(void *)
   {
     wasm3_error_printer("mahiwa_LinkSerial", result);
   }
-#ifdef MAHIWA_WIFI
+#ifdef ESP32 // @todo これもっと抽象化する
   Serial.println("WIFI MODE is enabled");
   result = mahiwa_LinkNetwork(runtime);
   if (result)
