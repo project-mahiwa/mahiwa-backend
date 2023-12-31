@@ -18,7 +18,8 @@ M3Result mahiwa_LinkESP32(IM3Runtime runtime)
     IM3Module modules = runtime->modules;
     const char *module = "esp32";
 
-    m3_LinkRawFunction(modules, module, "random", "I()", &m3_esp32_random);
+    // randomにしたいがtinygo的にアウトなのでesp32random(表向きにはrandom)
+    m3_LinkRawFunction(modules, module, "esp32random", "I()", &m3_esp32_random);
 
     return m3Err_none;
 }
