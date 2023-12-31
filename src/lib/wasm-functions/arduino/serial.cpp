@@ -42,14 +42,14 @@ m3ApiRawFunction(m3_printF64)
 }
 M3Result mahiwa_LinkSerial(IM3Runtime runtime)
 {
-    IM3Module module = runtime->modules;
-    const char *serial = "serial";
+    IM3Module modules = runtime->modules;
+    const char *module = "serial";
 
-    m3_LinkRawFunction(module, serial, "print", "v(*i)", &m3_print);
-    m3_LinkRawFunction(module, serial, "printI32", "v(i)", &m3_printI32);
-    m3_LinkRawFunction(module, serial, "printI64", "v(I)", &m3_printI64);
-    m3_LinkRawFunction(module, serial, "printF32", "v(fi)", &m3_printF32);
-    m3_LinkRawFunction(module, serial, "printF64", "v(Fi)", &m3_printF64);
+    m3_LinkRawFunction(modules, module, "print", "v(*i)", &m3_print);
+    m3_LinkRawFunction(modules, module, "printI32", "v(i)", &m3_printI32);
+    m3_LinkRawFunction(modules, module, "printI64", "v(I)", &m3_printI64);
+    m3_LinkRawFunction(modules, module, "printF32", "v(fi)", &m3_printF32);
+    m3_LinkRawFunction(modules, module, "printF64", "v(Fi)", &m3_printF64);
 
     return m3Err_none;
 }

@@ -41,6 +41,35 @@ void wasm_task(void *)
   {
     wasm3_error_printer("mahiwa_LinkSerial", result);
   }
+
+#if defined(M5CORE2) || defined(M5ATOMS3)
+  Serial.println("Display function is enabled");
+  result = mahiwa_LinkDisplay(runtime);
+  if (result)
+  {
+    wasm3_error_printer("mahiwa_LinkDisplay", result);
+  }
+#endif
+
+// @todo もっと抽象化したdefinedにしたい
+#if defined(ESP32) || defined(PICOW)
+  Serial.println("Network function is enabled");
+  result = mahiwa_LinkNetwork(runtime);
+  if (result)
+  {
+    wasm3_error_printer("mahiwa_LinkNetwork", result);
+  }
+#endif
+
+#ifdef ESP32
+  Serial.println("ESP32 function is enabled");
+  result = mahiwa_LinkESP32(runtime);
+  if (result)
+  {
+    wasm3_error_printer("mahiwa_LinkESP32", result);
+  }
+#endif
+
 #ifdef USE_COREMARK
   Serial.println("call coremark function link");
   result = mahiwa_LinkCoremark(runtime);

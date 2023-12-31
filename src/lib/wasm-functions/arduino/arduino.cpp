@@ -306,8 +306,8 @@ m3ApiRawFunction(m3_millis)
 
 M3Result mahiwa_LinkArduino(IM3Runtime runtime)
 {
-    IM3Module module = runtime->modules;
-    const char *arduino = "arduino";
+    IM3Module modules = runtime->modules;
+    const char *module = "arduino";
     // m3_LinkRawFunctionのi_signatureの書き方→https://github.com/wasm3/wasm3/issues/109
     // 厳密には正しくないが，WebAssemblyの型の制限もあるので，下記のように変換する
     // int,uint_8,uint_16,uint_32→i(i32)
@@ -320,47 +320,47 @@ M3Result mahiwa_LinkArduino(IM3Runtime runtime)
      * Random Numbers
      */
     // randomがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
-    m3_LinkRawFunction(module, arduino, "randomArduino", "i()", &m3_random);
-    m3_LinkRawFunction(module, arduino, "randomSeed", "v(i)", &m3_randomSeed);
+    m3_LinkRawFunction(modules, module, "randomArduino", "i()", &m3_random);
+    m3_LinkRawFunction(modules, module, "randomSeed", "v(i)", &m3_randomSeed);
     /**
      * Trigonometry
      */
-    m3_LinkRawFunction(module, arduino, "cos", "F(F)", &m3_cos);
-    m3_LinkRawFunction(module, arduino, "sin", "F(F)", &m3_sin);
-    m3_LinkRawFunction(module, arduino, "tan", "F(F)", &m3_tan);
+    m3_LinkRawFunction(modules, module, "cos", "F(F)", &m3_cos);
+    m3_LinkRawFunction(modules, module, "sin", "F(F)", &m3_sin);
+    m3_LinkRawFunction(modules, module, "tan", "F(F)", &m3_tan);
     /**
      * Math
      */
-    m3_LinkRawFunction(module, arduino, "abs", "i(i)", &m3_abs);
-    m3_LinkRawFunction(module, arduino, "constrain", "i(iii)", &m3_constrain);
-    m3_LinkRawFunction(module, arduino, "map", "i(iiiii)", &m3_map);
-    m3_LinkRawFunction(module, arduino, "max", "i(ii)", &m3_max);
-    m3_LinkRawFunction(module, arduino, "min", "i(ii)", &m3_min);
+    m3_LinkRawFunction(modules, module, "abs", "i(i)", &m3_abs);
+    m3_LinkRawFunction(modules, module, "constrain", "i(iii)", &m3_constrain);
+    m3_LinkRawFunction(modules, module, "map", "i(iiiii)", &m3_map);
+    m3_LinkRawFunction(modules, module, "max", "i(ii)", &m3_max);
+    m3_LinkRawFunction(modules, module, "min", "i(ii)", &m3_min);
     // powがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
-    m3_LinkRawFunction(module, arduino, "powArduino", "F(ii)", &m3_pow);
-    m3_LinkRawFunction(module, arduino, "sq", "i(i)", &m3_sq);
+    m3_LinkRawFunction(modules, module, "powArduino", "F(ii)", &m3_pow);
+    m3_LinkRawFunction(modules, module, "sq", "i(i)", &m3_sq);
     // sqrtがWASIと競合するらしく，TinyGoではオーバーライドされて壊れるので，名前を変える
-    m3_LinkRawFunction(module, arduino, "sqrtArduino", "F(i)", &m3_sqrt);
+    m3_LinkRawFunction(modules, module, "sqrtArduino", "F(i)", &m3_sqrt);
     /**
      * analog I/O
      */
-    m3_LinkRawFunction(module, arduino, "analogRead", "i(i)", &m3_analogRead);
-    // m3_LinkRawFunction(module, arduino, "analogReference", "v(ii)", &m3_analogReference);
-    m3_LinkRawFunction(module, arduino, "analogWrite", "v(ii)", &m3_analogWrite);
+    m3_LinkRawFunction(modules, module, "analogRead", "i(i)", &m3_analogRead);
+    // m3_LinkRawFunction(modules, module, "analogReference", "v(ii)", &m3_analogReference);
+    m3_LinkRawFunction(modules, module, "analogWrite", "v(ii)", &m3_analogWrite);
     /**
      * Digital I/O
      */
-    m3_LinkRawFunction(module, arduino, "digitalRead", "i(i)", &m3_digitalRead);
-    m3_LinkRawFunction(module, arduino, "digitalWrite", "v(ii)", &m3_digitalWrite);
-    m3_LinkRawFunction(module, arduino, "pinMode", "v(ii)", &m3_pinMode);
+    m3_LinkRawFunction(modules, module, "digitalRead", "i(i)", &m3_digitalRead);
+    m3_LinkRawFunction(modules, module, "digitalWrite", "v(ii)", &m3_digitalWrite);
+    m3_LinkRawFunction(modules, module, "pinMode", "v(ii)", &m3_pinMode);
 
     /**
      * Time
      */
-    m3_LinkRawFunction(module, arduino, "delay", "v(I)", &m3_delay);
-    m3_LinkRawFunction(module, arduino, "delayMicroseconds", "v(I)", &m3_delayMicroseconds);
-    m3_LinkRawFunction(module, arduino, "millis", "I()", &m3_millis);
-    m3_LinkRawFunction(module, arduino, "micros", "I()", &m3_micros);
+    m3_LinkRawFunction(modules, module, "delay", "v(I)", &m3_delay);
+    m3_LinkRawFunction(modules, module, "delayMicroseconds", "v(I)", &m3_delayMicroseconds);
+    m3_LinkRawFunction(modules, module, "millis", "I()", &m3_millis);
+    m3_LinkRawFunction(modules, module, "micros", "I()", &m3_micros);
 
     return m3Err_none;
 }

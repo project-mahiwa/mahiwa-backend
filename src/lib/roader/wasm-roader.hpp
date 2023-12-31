@@ -9,8 +9,21 @@
 // 定義読み込み
 #include <lib/wasm-functions/arduino/arduino.hpp>
 #include <lib/wasm-functions/arduino/serial.hpp>
+
+#if defined(ESP32) || defined(PICOW)
+#include <lib/wasm-functions/network/network.hpp>
+#endif
+
+#if defined(M5CORE2) || defined(M5ATOMS3)
+#include <lib/wasm-functions/display/display.hpp>
+#endif
+
+#ifdef ESP32
+#include <lib/wasm-functions/esp32/esp32.hpp>
+#endif
+
 #ifdef USE_COREMARK
-#include <lib/wasm-functions/mahiwa/coremark/coremark.hpp>
+#include <lib/wasm-functions/coremark/coremark.hpp>
 #endif
 
 // wasm3のexampleの値に従う
