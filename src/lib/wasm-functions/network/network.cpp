@@ -1,4 +1,4 @@
-#include <lib/wasm-functions/mahiwa/network/network.hpp>
+#include <lib/wasm-functions/network/network.hpp>
 wifi_mode_t convertWiFiMode(int32_t mode)
 {
     switch (mode)
