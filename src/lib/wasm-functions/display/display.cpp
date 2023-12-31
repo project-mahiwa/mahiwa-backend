@@ -1,4 +1,4 @@
-#include <lib/wasm-functions/mahiwa/display/display.hpp>
+#include <lib/wasm-functions/display/display.hpp>
 
 // coremark-minimalに必要な関数を用意する
 //   (import "env" "clock_ms" (func (;0;) (type 8)))
@@ -7,7 +7,7 @@ m3ApiRawFunction(m3_clock_ms)
 {
     // cppcheck-suppress cstyleCast
     m3ApiReturnType(int64_t);
-    m3ApiReturn(millis());
+
     m3ApiSuccess();
 }
 
