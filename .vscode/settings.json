@@ -4,6 +4,7 @@
     "cppcheck",
     "mahiwa",
     "pico",
+    "PICOW",
     "platformio",
     "tinygo",
     "wasi"
