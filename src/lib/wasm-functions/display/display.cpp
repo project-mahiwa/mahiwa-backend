@@ -37,8 +37,6 @@ m3ApiRawFunction(m3_display_print)
     lcd.println((char *)buff);
 
     m3ApiSuccess();
-
-    m3ApiSuccess();
 }
 
 M3Result mahiwa_LinkDisplay(IM3Runtime runtime)
