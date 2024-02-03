@@ -3,9 +3,9 @@
 m3ApiRawFunction(m3_print)
 {
     // cppcheck-suppress cstyleCast
-    m3ApiGetArgMem(const uint8_t *, out);
+    m3ApiGetArgMem(const int32_t *, out);
     // cppcheck-suppress cstyleCast
-    m3ApiGetArg(uint32_t, out_len);
+    m3ApiGetArg(int32_t, out_len);
     byte buff[out_len + 1];
     memcpy(buff, out, out_len);
     buff[out_len] = '\0';

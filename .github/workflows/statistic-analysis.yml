@@ -28,5 +28,6 @@ jobs:
       - name: 静的解析(cppcheck)
         run: |
           # esp32系とpico系で最低限チェック
-          pio check -e pico
-          pio check -e m5stack-atom
+          pio run -e pico-w
+          pio run -e m5stack-atom
+          pio run -e seeed_xiao_esp32c3
