@@ -24,9 +24,9 @@ m3ApiRawFunction(m3_display_init)
 m3ApiRawFunction(m3_display_print)
 {
     // cppcheck-suppress cstyleCast
-    m3ApiGetArgMem(const uint8_t *, out);
+    m3ApiGetArgMem(const int32_t *, out);
     // cppcheck-suppress cstyleCast
-    m3ApiGetArg(uint32_t, out_len);
+    m3ApiGetArg(int32_t, out_len);
     // m3ApiGetArg(int32_t, x);
     // m3ApiGetArg(int32_t, y);
 
