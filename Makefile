@@ -14,7 +14,6 @@ monitor:
 r-pico-w:
 	pio run -t upload -e pico-w
 	@make monitor
-# M5 ATOM Matrixはwasm3が動かない(PSRAMが無い)が，壊れの検証用にあえて残しておく
 r-atom-m:
 	pio run -t upload -e m5stack-atom
 	@make monitor
